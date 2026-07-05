@@ -1,0 +1,12 @@
+# Build artifacts
+ig_plain/
+*.apk
+*.idsig
+*.jks
+
+# Tools
+apktool.jar
+cmdline-tools.zip
+
+# Original APK source
+ig.apk
