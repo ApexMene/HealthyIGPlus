@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <strong>Strip Instagram of reels, suggested content, and ads — without breaking what matters.</strong>
+  <strong>Strip Instagram of reels, suggested content, and ads - without breaking what matters.</strong>
 </p>
 
 <p align="center">
@@ -17,7 +17,7 @@
 
 ---
 
-HealthyIG is a set of SMALI patches for the Instagram Android app that removes unwanted UI elements — reels, suggested posts, explore tab, and ads — while preserving core functionality: home feed, stories, direct messages, and search. No root required.
+HealthyIG is a set of SMALI patches for the Instagram Android app that removes unwanted UI elements - reels, suggested posts, explore tab, and ads - while preserving core functionality: home feed, stories, direct messages, and search. No root required.
 
 ## Features
 
@@ -65,18 +65,18 @@ graph TB
 
 ### Layer 1: Endpoint Blocking
 
-[`scripts/block_endpoints.sh`](scripts/block_endpoints.sh) rewrites SMALI to intercept network requests to Instagram's API. Targeted endpoints — reels feeds, explore, suggested content, ads — are short-circuited so the app never processes their responses. Requests still reach Instagram's servers, but the client ignores them.
+[`scripts/block_endpoints.sh`](scripts/block_endpoints.sh) rewrites SMALI to intercept network requests to Instagram's API. Targeted endpoints - reels feeds, explore, suggested content, ads - are short-circuited so the app never processes their responses. Requests still reach Instagram's servers, but the client ignores them.
 
 ### Layer 2: Display Filter
 
 [`patches/5bd.A00.patch`](patches/5bd.A00.patch) modifies the `LX/5bd;->A00` method, Instagram's client-side content classifier. Each feed item carries a type tag (enum). The patch skips rendering for seven types:
 
-- `MIXED_UNCONNECTED` — suggested posts
-- `CLIPS_NETEGO` — suggested reels
-- `SUGGESTED_USERS` / `SUGGESTED_PRODUCERS` — account suggestions
-- `SUGGESTED_HASHTAGS` — hashtag suggestions
-- `STORIES_NETEGO` — story suggestions
-- `AD` — sponsored content
+- `MIXED_UNCONNECTED` - suggested posts
+- `CLIPS_NETEGO` - suggested reels
+- `SUGGESTED_USERS` / `SUGGESTED_PRODUCERS` - account suggestions
+- `SUGGESTED_HASHTAGS` - hashtag suggestions
+- `STORIES_NETEGO` - story suggestions
+- `AD` - sponsored content
 
 The `END_OF_FEED_DEMARCATOR` type is explicitly preserved so the "all caught up" divider still appears.
 
@@ -84,9 +84,9 @@ The `END_OF_FEED_DEMARCATOR` type is explicitly preserved so the "all caught up"
 
 Two patches work together to stop the feed from loading more content after the "all caught up" divider:
 
-- **`patches/3lq.A03.patch`** — The original pagination gate (`LX/3lq;->A03()Z`) checked whether the **last** displayed item was the end-of-feed bookmark. Instagram's response parser inserts replacement recommendations after the bookmark, so it was never last. The patch checks whether the bookmark appears **anywhere** in the list by delegating to `LX/3vm;->A06()`.
+- **`patches/3lq.A03.patch`** - The original pagination gate (`LX/3lq;->A03()Z`) checked whether the **last** displayed item was the end-of-feed bookmark. Instagram's response parser inserts replacement recommendations after the bookmark, so it was never last. The patch checks whether the bookmark appears **anywhere** in the list by delegating to `LX/3vm;->A06()`.
 
-- **`patches/3eo.A01.patch`** — Instagram has a server-controlled preference `is_ifr_eligible` that can override the pagination gate. When enabled, the controller bypasses the end-of-feed check entirely and continues loading content. The patch forces this preference to `false`.
+- **`patches/3eo.A01.patch`** - Instagram has a server-controlled preference `is_ifr_eligible` that can override the pagination gate. When enabled, the controller bypasses the end-of-feed check entirely and continues loading content. The patch forces this preference to `false`.
 
 ## Quick Start
 
@@ -159,9 +159,9 @@ HealthyIG/
 ├── assets/
 │   └── logo.svg              # Project logo
 ├── patches/
-│   ├── 5bd.A00.patch         # Display filter — removes 7 content types
-│   ├── 3lq.A03.patch         # Pagination gate — any-A0G detection
-│   └── 3eo.A01.patch         # Server preference override — return false
+│   ├── 5bd.A00.patch         # Display filter - removes 7 content types
+│   ├── 3lq.A03.patch         # Pagination gate - any-A0G detection
+│   └── 3eo.A01.patch         # Server preference override - return false
 ├── scripts/
 │   ├── block_endpoints.sh    # Endpoint blocker (SMALI rewrites)
 │   └── patch_parser.sh       # Additional parser-layer filter
@@ -174,7 +174,7 @@ HealthyIG/
 
 ## Patches
 
-Each patch targets a specific SMALI method. They are designed to be minimal — none modifies more than 30 lines of bytecode.
+Each patch targets a specific SMALI method. They are designed to be minimal - none modifies more than 30 lines of bytecode.
 
 | Patch | Target | Change | Lines Changed |
 |-------|--------|--------|---------------|
@@ -186,11 +186,11 @@ Each patch targets a specific SMALI method. They are designed to be minimal — 
 
 | Symptom | Likely Cause |
 |---------|--------------|
-| Infinite spinner at feed end | `3eo.A01` not applied — `is_ifr_eligible` still active |
-| Feed keeps scrolling past divider | `3lq.A03` not applied — original last-item check still in use |
+| Infinite spinner at feed end | `3eo.A01` not applied - `is_ifr_eligible` still active |
+| Feed keeps scrolling past divider | `3lq.A03` not applied - original last-item check still in use |
 | Suggested posts still visible | `5bd.A00` not applied, or enum count != 7 |
-| App crashes on startup | Instagram version mismatch — use 436.0.0.41.73 |
-| "App not installed" error | Signature mismatch — uninstall old version first |
+| App crashes on startup | Instagram version mismatch - use 436.0.0.41.73 |
+| "App not installed" error | Signature mismatch - uninstall old version first |
 
 ### Patch Application Order
 
@@ -205,4 +205,4 @@ Apply patches before running the endpoint blocking script. The patches modify SM
 
 ## License
 
-[MIT](LICENSE) — Copyright (c) 2026 Gianluca Meneghetti
+[MIT](LICENSE) - Copyright (c) 2026 Gianluca Meneghetti
