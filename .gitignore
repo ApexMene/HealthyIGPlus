@@ -16,8 +16,16 @@ cmdline-tools.zip
 # Original APK source
 ig.apk
 
+# OpenCode agent state
+.omo/
+.codegraph/
+
 # Editor / diff backups
 *.bak*
+
+# Stale build scripts (historical versions not part of distribution)
+script_v10.sh
+script_v10_*
 
 # OS files
 .DS_Store

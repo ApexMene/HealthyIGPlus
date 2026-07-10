@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 60" width="480" height="120">
+  <defs>
+    <linearGradient id="igGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF0060"/>
+      <stop offset="50%" stop-color="#FF7A00"/>
+      <stop offset="100%" stop-color="#FFD600"/>
+    </linearGradient>
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#405DE6"/>
+      <stop offset="100%" stop-color="#5851DB"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Shield icon -->
+  <path d="M8 10 L30 4 L52 10 L52 30 Q52 44 30 54 L30 54 Q8 44 8 30 Z"
+        fill="url(#shieldGrad)" opacity="0.9"/>
+  <!-- Cross inside shield -->
+  <path d="M24 24 L36 24 L36 18 L44 18 L44 24 L50 24 L50 32 L44 32 L44 38 L36 38 L36 32 L24 32 Z"
+        fill="white" opacity="0.95"/>
+  <!-- Heart pulse line -->
+  <path d="M14 28 L22 28 L26 22 L30 36 L34 26 L38 28 L46 28"
+        fill="none" stroke="#FFD600" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Text -->
+  <text x="64" y="36" font-family="'SF Pro Display',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif"
+        font-size="28" font-weight="700" letter-spacing="1">
+    <tspan fill="#262626">Healthy</tspan><tspan fill="url(#igGrad)">IG</tspan>
+  </text>
+  <text x="64" y="52" font-family="'SF Pro Display',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif"
+        font-size="11" fill="#8E8E8E" letter-spacing="2" font-weight="500">A CLEANER INSTAGRAM</text>
+</svg>
