@@ -7,8 +7,8 @@
 
 ## 4.2 (2026-07-10)
 
-- **5bd.A00**: expanded to 16 types (nuclear) — blocked all suggested/netego types including SUGGESTED_TOP_ACCOUNTS, SUGGESTED_BUSINESSES, SUGGESTED_HASHTAGS, SUGGESTED_SHOP and 8 more. Caused infinite spinner. Deprecated.
-- **3eo.A01**: forced `is_ifr_eligible` to false — kills Instagram's server-driven pagination bypass that overrode 3lq.A03.
+- **5bd.A00**: expanded to 16 types (nuclear) - blocked all suggested/netego types including SUGGESTED_TOP_ACCOUNTS, SUGGESTED_BUSINESSES, SUGGESTED_HASHTAGS, SUGGESTED_SHOP and 8 more. Caused infinite spinner. Deprecated.
+- **3eo.A01**: forced `is_ifr_eligible` to false - kills Instagram's server-driven pagination bypass that overrode 3lq.A03.
 
 ## 4.1 (2026-07-09)
 
@@ -16,5 +16,5 @@
 
 ## 4.0 (2026-07-09)
 
-- **5bd.A00**: initial display filter — 6 enum types (MIXED_UNCONNECTED, CLIPS_NETEGO, SUGGESTED_USERS, SUGGESTED_PRODUCERS_V2, SUGGESTED_PRODUCERS, STORIES_NETEGO).
+- **5bd.A00**: initial display filter - 6 enum types (MIXED_UNCONNECTED, CLIPS_NETEGO, SUGGESTED_USERS, SUGGESTED_PRODUCERS_V2, SUGGESTED_PRODUCERS, STORIES_NETEGO).
 - `script_v4.sh`: endpoint-level blocking for reels, explore, suggested content, ads.

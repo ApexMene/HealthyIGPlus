@@ -22,15 +22,15 @@ Patch Instagram to remove reels, suggested content, and ads from the home feed w
 
 Three independent layers, each removable:
 
-**1. Endpoint blocking** — `script_v4.sh` rewrites SMALI to intercept and short-circuit server endpoints for reels, explore, suggested content, and ads. Requests still reach Instagram's servers but the app ignores the responses.
+**1. Endpoint blocking** - `script_v4.sh` rewrites SMALI to intercept and short-circuit server endpoints for reels, explore, suggested content, and ads. Requests still reach Instagram's servers but the app ignores the responses.
 
-**2. Client-side display filter** — `patches/5bd.A00.patch` adds enum checks to the `LX/5bd;->A00` method. Each feed item carries a type tag — the patch skips rendering for 7 types: mixed-unconnected (suggested posts), clips-netego (suggested reels), suggested users, suggested producers, suggested hashtags, stories netego, and ads.
+**2. Client-side display filter** - `patches/5bd.A00.patch` adds enum checks to the `LX/5bd;->A00` method. Each feed item carries a type tag - the patch skips rendering for 7 types: mixed-unconnected (suggested posts), clips-netego (suggested reels), suggested users, suggested producers, suggested hashtags, stories netego, and ads.
 
-**3. Pagination halt** — two patches force the home feed to stop at the "all caught up" divider (`LX/3eh;->A0G`):
+**3. Pagination halt** - two patches force the home feed to stop at the "all caught up" divider (`LX/3eh;->A0G`):
 
-- `patches/3lq.A03.patch` — the original pagination gate (`LX/3lq;->A03()Z`) checked whether the LAST displayed item was the end-of-feed bookmark. Instagram's response parser inserts replacement recommendations after the bookmark, so it was never last. The patch delegates to `LX/3vm;->A06()` which returns true when the bookmark appears ANYWHERE in the list.
+- `patches/3lq.A03.patch` - the original pagination gate (`LX/3lq;->A03()Z`) checked whether the LAST displayed item was the end-of-feed bookmark. Instagram's response parser inserts replacement recommendations after the bookmark, so it was never last. The patch delegates to `LX/3vm;->A06()` which returns true when the bookmark appears ANYWHERE in the list.
 
-- `patches/3eo.A01.patch` — Instagram has a server-controlled user preference `is_ifr_eligible` that overrides the pagination gate entirely. The patch forces it to false, so the end-of-feed path is always taken.
+- `patches/3eo.A01.patch` - Instagram has a server-controlled user preference `is_ifr_eligible` that overrides the pagination gate entirely. The patch forces it to false, so the end-of-feed path is always taken.
 
 ## Quick start
 
@@ -75,7 +75,7 @@ apksigner sign --ks ./healthyig.jks --ks-pass pass:password \
   --v2-signing-enabled true --v3-signing-enabled true \
   --min-sdk-version 21 --out install.apk install_aligned.apk
 
-# 7. Install (uninstall first — signature changed)
+# 7. Install (uninstall first - signature changed)
 adb uninstall com.instagram.android
 adb install install.apk
 ```
@@ -111,11 +111,11 @@ grep "const/4 v0, 0x0" ig_plain/smali/X/3eo.smali
 
 | Symptom | Likely cause |
 |---------|-------------|
-| Infinite spinner at feed end | `3eo.A01` patch not applied — `is_ifr_eligible` still active |
-| Feed keeps scrolling past divider | `3lq.A03` not applied — original last-item check still in use |
+| Infinite spinner at feed end | `3eo.A01` patch not applied - `is_ifr_eligible` still active |
+| Feed keeps scrolling past divider | `3lq.A03` not applied - original last-item check still in use |
 | Suggested posts still visible | `5bd.A00` not applied or enum mismatch (check grep count = 7) |
-| App crashes on startup | Instagram version mismatch — use 436.0.0.41.73 |
-| "App not installed" error | Signature mismatch — uninstall old version first |
+| App crashes on startup | Instagram version mismatch - use 436.0.0.41.73 |
+| "App not installed" error | Signature mismatch - uninstall old version first |
 
 ## License
 
