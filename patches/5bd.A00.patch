@@ -1,0 +1,53 @@
+--- a/ig_plain/smali/X/5bd.smali	2026-07-10 16:53:15.032950083 +0200
++++ b/ig_plain/smali/X/5bd.smali	2026-07-10 16:43:27.510153390 +0200
+@@ -32,6 +32,50 @@
+ 
+     .line 11
+     :cond_0
++    # === PATCH: filter 6 suggested types ===
++    # A0c = MIXED_UNCONNECTED (suggested posts)
++    sget-object v1, LX/3eh;->A0c:LX/3eh;
++    if-ne v2, v1, :cond_pmu1
++    const/4 v0, 0x1
++    return v0
++    :cond_pmu1
++    # A0C = CLIPS_NETEGO (RIFU / suggested reels)
++    sget-object v1, LX/3eh;->A0C:LX/3eh;
++    if-ne v2, v1, :cond_pmu2
++    const/4 v0, 0x1
++    return v0
++    :cond_pmu2
++    # A12 = SUGGESTED_USERS
++    sget-object v1, LX/3eh;->A12:LX/3eh;
++    if-ne v2, v1, :cond_pmu3
++    const/4 v0, 0x1
++    return v0
++    :cond_pmu3
++    # A0y = SUGGESTED_PRODUCERS_V2
++    sget-object v1, LX/3eh;->A0y:LX/3eh;
++    if-ne v2, v1, :cond_pmu4
++    const/4 v0, 0x1
++    return v0
++    :cond_pmu4
++    # A0x = SUGGESTED_PRODUCERS
++    sget-object v1, LX/3eh;->A0x:LX/3eh;
++    if-ne v2, v1, :cond_pmu5
++    const/4 v0, 0x1
++    return v0
++    :cond_pmu5
++    # A0t = STORIES_NETEGO
++    sget-object v1, LX/3eh;->A0t:LX/3eh;
++    if-ne v2, v1, :cond_pmu6
++    const/4 v0, 0x1
++    return v0
++    :cond_pmu6
++    # A04 = AD (sponsored post)
++    sget-object v1, LX/3eh;->A04:LX/3eh;
++    if-ne v2, v1, :cond_pri
++    const/4 v0, 0x1
++    return v0
++    :cond_pri
++    # === END PATCH ===
+     invoke-virtual {p0}, LX/3vm;->A09()Lcom/instagram/feed/media/Media;
+ 
+     .line 12

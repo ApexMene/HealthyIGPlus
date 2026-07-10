@@ -1,12 +1,24 @@
-# Build artifacts
+# Decompiled APK (copyrighted Meta codebase)
 ig_plain/
+
+# Built APKs
 *.apk
 *.idsig
-*.jks
 
-# Tools
+# Keystore / signing keys
+*.jks
+*.keystore
+
+# Build tools
 apktool.jar
 cmdline-tools.zip
 
 # Original APK source
 ig.apk
+
+# Editor / diff backups
+*.bak*
+
+# OS files
+.DS_Store
+Thumbs.db

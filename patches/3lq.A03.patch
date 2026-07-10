@@ -1,0 +1,98 @@
+--- a/ig_plain/smali/X/3lq.smali	2026-07-09 01:20:14.183485991 +0200
++++ b/ig_plain/smali/X/3lq.smali	2026-07-09 06:41:33.973103184 +0200
+@@ -690,78 +690,34 @@
+ .end method
+ 
+ .method public final A03()Z
+-    .locals 2
++    .locals 1
+     .annotation build Ldalvik/annotation/optimization/NeverInline;
+     .end annotation
+ 
+-    .line 0
++    # === PATCH pmu_eod: end-of-feed when ANY item is A0G ===
++    # Originally checked ONLY last item of A02; ctor inserts suggested
++    # items AFTER the A0G demarcator (LX/3lq <init>(LX/6oq;)V line ~359
++    # invokes List;->addAll to append replacement LX/3vm entries), pushing
++    # A0G out of the last position. After 5bd filtering, the LAST item of
++    # A02 was always suggested content, so A03() returned FALSE -> 4zT.A03
++    # never branched to the A06 end-of-feed path -> home feed kept
++    # paginating past the "hai finito le cose da vedere" demarcator.
++    # Delegate to LX/3vm;->A06 (which iterates the collection and returns
++    # TRUE if ANY LX/3vm has feed-type == A0G). A06 null/empty guards
++    # already present internally; we guard A02 null here for clarity.
+     iget-object v0, p0, LX/3lq;->A02:Ljava/util/List;
+ 
+-    .line 1
+-    .line 2
+-    if-eqz v0, :cond_1
+-
+-    .line 3
+-    .line 4
+-    invoke-static {v0}, LX/4Fi;->A12(Ljava/util/List;)Ljava/lang/Object;
+-
+-    .line 5
+-    .line 6
+-    .line 7
+-    move-result-object v0
+-
+-    .line 8
+-    check-cast v0, LX/3vm;
+-
+-    .line 9
+-    .line 10
+-    if-eqz v0, :cond_1
+-
+-    .line 11
+-    .line 12
+-    iget-object v1, v0, LX/3vm;->A0p:LX/3eh;
+-
+-    .line 13
+-    .line 14
+-    if-nez v1, :cond_0
+-
+-    .line 15
+-    .line 16
+-    invoke-virtual {v0}, LX/3vm;->A08()LX/3eh;
+-
+-    .line 17
+-    .line 18
+-    .line 19
+-    move-result-object v1
+-
+-    .line 20
+-    :cond_0
+-    :goto_0
+-    sget-object v0, LX/3eh;->A0G:LX/3eh;
+-
+-    .line 21
+-    .line 22
+-    if-ne v1, v0, :cond_2
+-
+-    .line 23
+-    .line 24
+-    const/4 v0, 0x1
++    if-eqz v0, :cond_pmu_empty
+ 
+-    .line 25
+-    return v0
++    invoke-static {v0}, LX/3vm;->A06(Ljava/util/Collection;)Z
+ 
+-    .line 26
+-    :cond_1
+-    const/4 v1, 0x0
++    move-result v0
+ 
+-    .line 27
+-    goto :goto_0
++    return v0
+ 
+-    .line 28
+-    :cond_2
++    :cond_pmu_empty
+     const/4 v0, 0x0
+ 
+-    .line 29
+     return v0
+ .end method
+ 
