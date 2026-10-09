@@ -1,6 +1,6 @@
 --- a/ig_plain/smali/X/5bd.smali	2026-07-10 16:53:15.032950083 +0200
 +++ b/ig_plain/smali/X/5bd.smali	2026-07-10 16:43:27.510153390 +0200
-@@ -32,6 +32,50 @@
+@@ -32,6 +32,73 @@
  
      .line 11
      :cond_0
@@ -47,6 +47,29 @@
 +    const/4 v0, 0x1
 +    return v0
 +    :cond_pri
++    # === PATCH 5.0: home shows only accounts you follow ===
++    # The "For you" home serves suggestions as plain MEDIA items. Only media tagged by
++    # the home timeline store (2pM sets rug_pull_state) are checked, so profile and
++    # search feeds of accounts you don't follow are untouched.
++    invoke-virtual {p0}, LX/3vm;->A09()Lcom/instagram/feed/media/Media;
++    move-result-object v1
++    if-eqz v1, :cond_hfo
++    iget-object v0, v1, Lcom/instagram/feed/media/Media;->A04:Lcom/instagram/feed/media/LiveTreeMediaDict;
++    invoke-virtual {v0}, Lcom/instagram/feed/media/LiveTreeMediaDict;->A0B()LX/4fb;
++    move-result-object v0
++    if-eqz v0, :cond_hfo
++    invoke-static {v1}, LX/223;->A0n(Lcom/instagram/feed/media/Media;)Lcom/instagram/user/model/User;
++    move-result-object v1
++    if-eqz v1, :cond_hfo
++    invoke-virtual {v1}, Lcom/instagram/user/model/User;->A00()LX/5rJ;
++    move-result-object v1
++    # A05 = FollowStatusNotFollowing
++    sget-object v0, LX/5rJ;->A05:LX/5rJ;
++    if-ne v1, v0, :cond_hfo
++    const/4 v0, 0x1
++    return v0
++    :cond_hfo
++    const/4 v0, 0x0
 +    # === END PATCH ===
      invoke-virtual {p0}, LX/3vm;->A09()Lcom/instagram/feed/media/Media;
  

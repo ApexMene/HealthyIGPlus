@@ -32,6 +32,9 @@ HealthyIG is a set of SMALI patches for the Instagram Android app that removes u
 | Explore / Discover | ❌ Removed |
 | Suggested posts in feed | ❌ Filtered |
 | Suggested reels in feed | ❌ Filtered |
+| "For you" home | ❌ Home loads the Following feed |
+| Unrelated reels after opening one (profile, search) | ❌ Chaining blocked |
+| Keyword search results (reels grid) | ❌ Removed, account search stays |
 | Ads and sponsored posts | ❌ Filtered |
 | Scroll past "all caught up" divider | ❌ Halted |
 
@@ -111,6 +114,9 @@ patch -p1 < patches/5bd.A00.patch
 patch -p1 < patches/3lq.A03.patch
 patch -p1 < patches/3eo.A01.patch
 
+# 2b. Home asks for the Following feed, never "For you"
+patch -p1 < patches/3aC.A01.patch
+
 # 4. Apply endpoint blocking (removes reels tab, explore, ads endpoints)
 ./scripts/block_endpoints.sh ig_plain
 
@@ -181,6 +187,7 @@ Each patch targets a specific SMALI method. They are designed to be minimal - no
 | `5bd.A00.patch` | `LX/5bd;->A00(LX/3vm;)Z` | Adds 7 enum type checks before the original classifier logic | ~30 |
 | `3lq.A03.patch` | `LX/3lq;->A03()Z` | Replaces "last item is divider" with "any item is divider" via `LX/3vm;->A06` delegation | ~8 |
 | `3eo.A01.patch` | `LX/3eo;->A01(LX/5tJ;)Z` | Replaces method body with `return false` | ~4 |
+| `3aC.A01.patch` | `LX/3aC;->A01` (`feed/timeline/` params) | Head loads send `following_cold_start` / `following_warm_start` as `reason` | ~24 |
 
 ## Troubleshooting
 

@@ -59,6 +59,37 @@ replacements["\"discover/chaining_experience_contextual_ads/\""]="\"\""
 replacements["\"discover/chaining_experience_notification_ads/\""]="\"\""
 replacements["\"discover/feed_style_feed_of_ads/\""]="\"\""
 
+### ── 5.0: reel and post chaining (unrelated reels after opening one) ─────────
+replacements["\"discover/chaining/\""]="\"\""
+replacements["\"discover/chaining_experience_feed/\""]="\"\""
+replacements["\"discover/injected_chaining_explore_media/\""]="\"\""
+replacements["\"discover/direct_reshare_chaining_feed/\""]="\"\""
+replacements["\"mental_well_being/chaining_experience_ifr_feed/\""]="\"\""
+replacements["\"clips/connected/\""]="\"\""
+replacements["\"clips/associated_clips/\""]="\"\""
+replacements["\"clips/clips_from_suggested_users/\""]="\"\""
+replacements["\"clips/discover/interest/stream/\""]="\"\""
+replacements["\"clips/discover/digest/\""]="\"\""
+replacements["\"clips/discover/inspiration/\""]="\"\""
+replacements["\"clips/discover/location/\""]="\"\""
+replacements["\"clips/stream_clips_pivot_page/\""]="\"\""
+replacements["\"clips/rifu_showcase/\""]="\"\""
+replacements["\"clips/risu_medias/\""]="\"\""
+replacements["\"clips/mid_cards/\""]="\"\""
+replacements["\"clips/breaking_creators_clips/\""]="\"\""
+replacements["\"clips/trends_media_feed/\""]="\"\""
+replacements["\"clips/xdt_get_clips_trend_only/\""]="\"\""
+replacements["\"clips/keyword/\""]="\"\""
+replacements["\"clips/playlist_clips/\""]="\"\""
+replacements["\"clips/templates_on_explore/\""]="\"\""
+replacements["\"clips/creation_inspiration_clips_on_chaining/\""]="\"\""
+replacements["\"clips/audio_page_chain_clips/\""]="\"\""
+
+### ── 5.0: keyword search results (reels grid); account typeahead stays ───────
+replacements["\"fbsearch/top_serp/\""]="\"\""
+replacements["\"fbsearch/top_serp_stream/\""]="\"\""
+replacements["\"fbsearch/non_profiled_serp/\""]="\"\""
+
 ### ── KEEP ALIVE (NOT blocked) ─────────────────────────────────────────────────
 # feed/timeline/        — main feed (followed accounts)
 # feed/timeline_stream/ — feed stream

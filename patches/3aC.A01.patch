@@ -1,0 +1,33 @@
+--- a/ig_plain/smali/X/3aC.smali	2026-10-09 18:24:24.351623279 +0200
++++ b/ig_plain/smali/X/3aC.smali	2026-10-09 18:24:24.410947423 +0200
+@@ -1310,6 +1310,30 @@
+     .line 518
+     move-result-object v15
+ 
++    # === PATCH 5.1: the home asks for the Following feed, never "For you" ===
++    # Head loads send the reasons the Following screen sends (P8n), so the server never
++    # builds the "For you" mix. Pagination and the Following/Favorites screens are unchanged.
++    sget-object v0, LX/2xx;->A0R:LX/2xx;
++    if-eq v7, v0, :cond_hfo_rend
++    sget-object v0, LX/2xx;->A0L:LX/2xx;
++    if-eq v7, v0, :cond_hfo_rend
++    sget-object v0, LX/2xx;->A0M:LX/2xx;
++    if-eq v7, v0, :cond_hfo_rend
++    sget-object v0, LX/2xx;->A0H:LX/2xx;
++    if-eq v7, v0, :cond_hfo_rend
++    sget-object v0, LX/2xx;->A0I:LX/2xx;
++    if-eq v7, v0, :cond_hfo_rend
++    sget-object v0, LX/2xx;->A0F:LX/2xx;
++    if-eq v7, v0, :cond_hfo_rend
++    sget-object v0, LX/2xx;->A0G:LX/2xx;
++    if-eq v7, v0, :cond_hfo_rend
++    const-string v15, "following_warm_start"
++    sget-object v0, LX/2xx;->A0A:LX/2xx;
++    if-ne v7, v0, :cond_hfo_rend
++    const-string v15, "following_cold_start"
++    :cond_hfo_rend
++    # === END PATCH ===
++
+     .line 519
+     sget-object v0, LX/2xx;->A03:LX/2xx;
+ 

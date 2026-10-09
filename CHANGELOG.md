@@ -1,5 +1,14 @@
 # Changelog
 
+## 5.1 (2026-10-09)
+
+- **3aC.A01** (new, `patches/3aC.A01.patch`): the home never loads "For you". Every head load of `feed/timeline/` sends `reason=following_cold_start` / `following_warm_start`, the reasons the Following screen (`P8n`) sends, so the server builds the followed-only feed instead of a suggestion mix that 5.0 had to filter down to almost nothing (left an endless spinner). Pagination and the Following/Favorites screens keep their own reasons. The 5.0 follow filter stays as a safety net.
+
+## 5.0 (2026-10-09)
+
+- **5bd.A00**: home shows only accounts you follow. Instagram switched the home to a "For you" feed that serves suggestions as plain `MEDIA` items ("Suggested for you" + Follow button), which the type filter cannot see. Media tagged by the home timeline store (`rug_pull_state`, set in `2pM`) whose owner is `FollowStatusNotFollowing` are now skipped; profile and search feeds are untouched because their media carry no tag.
+- **block_endpoints.sh**: reel/post chaining (`discover/chaining*`, `clips/connected/`, `clips/associated_clips/`, `clips/discover/interest/stream/` and the other discovery streams) and keyword search results (`fbsearch/top_serp*`, `non_profiled_serp`). Opening a reel from a profile or a search no longer scrolls into unrelated reels. Account typeahead search stays.
+
 ## 4.3 (2026-07-10)
 
 - **5bd.A00**: reverted to V4 base (6 suggested types) + added AD (A04) filter. The nuclear 16-type patch in V4.2 caused an infinite spinner because too many item types were blocked, breaking the UI rendering loop. V4.3 keeps the 6 known-safe types plus ads.
